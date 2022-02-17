@@ -20,17 +20,4 @@ export class WeatherService {
 
     return this.http.get(this.url, { params });
   }
-
-/*   getWeatherDataByZipCode(zip: string) {
-
-    let params = new HttpParams()
-    .set('zip', zip + ',us')
-    .set('units', 'imperial')
-    .set('appid', this.apiKey)
-
-    return this.http.get(this.url, { params });
-  } */
-
-
-
 }
