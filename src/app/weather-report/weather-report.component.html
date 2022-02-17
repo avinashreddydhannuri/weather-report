@@ -1,35 +1,31 @@
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <div class="col-sm-12 text-center">
-            <div class="container">
-                <div class="input-group mt-5">
-                    <input class="form-control" type="text" #userInput placeholder="Enter city name">
-                        <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Find</button>
+            <div class="input-group mt-5">
+                <input class="form-control" type="text" pattern="^[a-zA-Z',.\s-]{1,25}$" #userInput placeholder="Enter city name" required>
+                <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)">Find</button>
             </div>
             <h3>Find weather in your city</h3>
         </div>
-        <table>
+        <table *ngIf="requestIsValid" class="table table-light table-striped table-bordered table-sm">
             <tbody>
                 <tr>
-                    <td>Temparature</td><td>{{ weather.main.temp }}</td>
+                    <td>Temparature:</td><td>{{ weather.main.temp }}<span>&#8457;</span></td>
                 </tr>
                 <tr>
-                    <td>Feels like</td><td>{{ weather.main.feels_like }}</td>
+                    <td>Feels like Temparature:</td><td>{{ weather.main.feels_like }}<span>&#8457;</span></td>
                 </tr>
                 <tr>
-                    <td>Humidity</td><td>{{ weather.main.humidity }}</td>
+                    <td>Humidity</td><td>{{ weather.main.humidity }}%</td>
                 </tr>
                 <tr>
-                    <td>Pressure</td><td>{{ weather.main.pressure }}</td>
+                    <td>Sunrise</td><td>{{ weather.sys.sunrise * 1000 | date:'h:mm':'EST' }}<span>&nbsp;AM</span></td>
                 </tr>
                 <tr>
-                    <td>Sunrise</td><td>{{ weather.sys.sunrise * 1000 | date:'H:mm' }}</td>
+                    <td>Sunset</td><td>{{ weather.sys.sunset * 1000 | date:'h:mm':'EST' }}<span>&nbsp;PM</span></td>
                 </tr>
                 <tr>
-                    <td>Sunset</td><td>{{ weather.sys.sunset * 1000 | date:'H:mm' }}</td>
-                </tr>
-                <tr>
-                    <td>Geo coords</td><td>{{ weather.coord.lat }}, {{ weather.coord.lon }}</td>
+                    <td>Geo coords</td><td>{{ weather.coord.lat }}°, {{ weather.coord.lon }}°</td>
                 </tr>
             </tbody>
         </table>

@@ -7,7 +7,8 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./weather-report.component.css']
 })
 export class WeatherReportComponent implements OnInit {
-  weather;
+  weather: any;
+  public requestIsValid = false;
 
   constructor(private weatherService: WeatherService) { }
 
@@ -15,8 +16,12 @@ export class WeatherReportComponent implements OnInit {
   }
 
   getCity(city) {
-    this.weatherService.getWeatherDataByCityName(city).subscribe(data=>{
+      this.weatherService.getWeatherDataByCityName(city).subscribe( data => {
       this.weather = data;
+      this.requestIsValid = true;
+    },
+    err => {
+      console.log("ERROR: API returned this: " +' '+ err);
     })
   }
 
